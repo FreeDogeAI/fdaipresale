@@ -3,66 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Can eli Barzani PUBG UC Satış</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="assets/favicon.ico">
+    <title>Can eli Barzani PUBG UC - Bakım Modu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background: #1a2b50; /* PUBG mavi tonu */
+            color: white;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-image: url('https://i.ibb.co/4YfL6J5/pubg-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+        }
+        
+        .maintenance-container {
+            max-width: 800px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            border: 2px solid #ff5500; /* PUBG turuncu */
+            box-shadow: 0 0 30px rgba(255, 85, 0, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #ff5500;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 200px;
+            margin-bottom: 30px;
+        }
+        
+        p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        
+        .highlight {
+            color: #f0b90b;
+            font-weight: bold;
+        }
+        
+        .countdown {
+            font-size: 1.5rem;
+            margin: 30px 0;
+        }
+        
+        .social-links {
+            margin-top: 30px;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: white;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #ff5500;
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <div class="logo-container">
-            <img src="assets/images/barzani-logo.png" alt="Can eli Barzani PUBG UC">
+    <div class="maintenance-container">
+        <img src="https://i.ibb.co/0jQ2Z0X/barzani-logo.png" alt="Can eli Barzani PUBG UC" class="logo">
+        
+        <h1>SİTEMİZ BAKIM MODUNDA</h1>
+        
+        <p>
+            <span class="highlight">Can eli Barzani PUBG Mobile UC</span> satış sitemiz, 
+            daha iyi hizmet verebilmek için <span class="highlight">fiyat güncellemesi</span> 
+            yapıyoruz.
+        </p>
+        
+        <p>
+            Yeni <span class="highlight">indirimli UC paketleri</span> ve 
+            <span class="highlight">özel kampanyalarla</span> çok yakında hizmetinizdeyiz!
+        </p>
+        
+        <div class="countdown">
+            <div>Tahmini Açılış Süresi:</div>
+            <div id="countdown">03:00:00</div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="#uc-paketleri">UC PAKETLERİ</a></li>
-                <li><a href="#nasil-calisir">NASIL ÇALIŞIR?</a></li>
-                <li><a href="#sss">SSS</a></li>
-                <li><a href="#iletisim">İLETİŞİM</a></li>
-            </ul>
-        </nav>
-        <div class="user-actions">
-            <button class="login-btn">Giriş Yap</button>
-            <button class="cart-btn">Sepetim (0)</button>
+        
+        <p>
+            Acil UC ihtiyacınız için bize ulaşabilirsiniz:
+        </p>
+        
+        <a href="https://wa.me/905551234567" class="whatsapp-btn">
+            WhatsApp'tan Yazın
+        </a>
+        
+        <div class="social-links">
+            <a href="https://instagram.com/caneli_barzani_pubg" target="_blank">Instagram</a>
+            <a href="https://t.me/caneli_barzani_pubg" target="_blank">Telegram</a>
+            <a href="mailto:destek@canelipubguc.com">E-Posta</a>
         </div>
-    </header>
+    </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>PUBG MOBILE UC EN UYGUN FİYATLARLA!</h1>
-            <p>Anında yükleme - 7/24 Destek - %100 Güvenli</p>
-            <div class="countdown">
-                <span>KAMPANYA BİTİŞİ:</span>
-                <div id="countdown-timer">02:59:59</div>
-            </div>
-            <a href="#uc-paketleri" class="cta-button">Hemen Al</a>
-        </div>
-    </section>
-
-    <section id="uc-paketleri" class="packages">
-        <h2>POPÜLER UC PAKETLERİ</h2>
-        <div class="package-grid" id="package-container">
-            <!-- JS ile dinamik olarak yüklenecek -->
-        </div>
-    </section>
-
-    <section class="features">
-        <div class="feature-card">
-            <img src="assets/images/instant-icon.png" alt="Anında Teslimat">
-            <h3>Anında Teslimat</h3>
-            <p>Siparişiniz 60 saniyede hesabınıza yüklenir</p>
-        </div>
-        <div class="feature-card">
-            <img src="assets/images/secure-icon.png" alt="Güvenli Ödeme">
-            <h3>Güvenli Ödeme</h3>
-            <p>256-bit SSL şifreleme ile güvenli alışveriş</p>
-        </div>
-        <div class="feature-card">
-            <img src="assets/images/support-icon.png" alt="7/24 Destek">
-            <h3>7/24 Destek</h3>
-            <p>WhatsApp'tan anında destek</p>
-        </div>
-    </section>
-
-    <script src="script.js"></script>
+    <script>
+        // Geri sayım zamanlayıcısı
+        function startCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            let timeLeft = 3 * 60 * 60; // 3 saat
+            
+            const timer = setInterval(() => {
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
+                const seconds = timeLeft % 60;
+                
+                countdownElement.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                timeLeft--;
+                
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    countdownElement.textContent = "SİTEMİZ AÇILDI!";
+                    countdownElement.style.color = "#25D366";
+                }
+            }, 1000);
+        }
+        
+        // Sayfa yüklendiğinde çalışacak fonksiyonlar
+        document.addEventListener('DOMContentLoaded', startCountdown);
+    </script>
 </body>
 </html>
