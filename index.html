@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FDAI Presale</title>
+  <style>
+    body {
+      background-color: black;
+      color: gold;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+  <h1>Deploy FDAIPresale Contract</h1>
+  <button id="deployButton">Deploy Now</button>
+
+  <script>
+    const bytecode = "BURAYA_BYTECODE_GELECEK";
+    const abi = [];
+
+    document.getElementById("deployButton").onclick = async () => {
+      if (!window.ethereum) {
+        alert("Please install MetaMask!");
+        return;
+      }
+
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      const signer = provider.getSigner();
+      const factory = new ethers.ContractFactory(abi, bytecode, signer);
+
+      try {
+        const contract = await factory.deploy();
+        alert("Deployment submitted! Contract address: " + contract.address);
+      } catch (error) {
+        console.error(error);
+        alert("Deployment failed: " + error.message);
+      }
+    };
+  </script>
+</body>
+</html>
