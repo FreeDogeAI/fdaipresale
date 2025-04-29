@@ -4,100 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Can eli Barzani PUBG UC - Bakım Modu</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: #1a2b50;
-            color: white;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            background-image: url('https://i.ibb.co/4YfL6J5/pubg-bg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: multiply;
-        }
-        
-        .maintenance-container {
-            max-width: 800px;
-            padding: 40px;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 15px;
-            border: 2px solid #ff5500;
-            box-shadow: 0 0 30px rgba(255, 85, 0, 0.3);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            color: #ff5500;
-            margin-bottom: 20px;
-        }
-        
-        .logo {
-            max-width: 300px;
-            height: auto;
-            margin-bottom: 30px;
-            /* PNG şeffaflığı için */
-            background: transparent;
-        }
-        
-        p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-        
-        .highlight {
-            color: #f0b90b;
-            font-weight: bold;
-        }
-        
-        .countdown {
-            font-size: 1.5rem;
-            margin: 30px 0;
-        }
-        
-        .social-links {
-            margin-top: 30px;
-        }
-        
-        .social-links a {
-            display: inline-block;
-            margin: 0 10px;
-            color: white;
-            font-size: 1.2rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: #ff5500;
-        }
-        
-        .whatsapp-btn {
-            background: #25D366;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 20px;
-            transition: transform 0.3s;
-        }
-        
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="maintenance-container">
-        <!-- SENİN YÜKLEDİĞİN LOGO PNG DOSYASI -->
-        <img src="barzani-logo.png" alt="Can eli Barzani PUBG UC" class="logo">
+        <!-- logo.png dosyasını kullanıyoruz -->
+        <img src="logo.png" alt="Can eli Barzani PUBG UC" class="logo" id="site-logo">
         
         <h1>SİTEMİZ BAKIM MODUNDA</h1>
         
@@ -114,7 +26,7 @@
         
         <div class="countdown">
             <div>Tahmini Açılış Süresi:</div>
-            <div id="countdown">03:00:00</div>
+            <div id="countdown-timer">03:00:00</div>
         </div>
         
         <p>
@@ -124,40 +36,8 @@
         <a href="https://wa.me/905551234567" class="whatsapp-btn">
             WhatsApp'tan Yazın
         </a>
-        
-        <div class="social-links">
-            <a href="https://instagram.com/caneli_barzani_pubg" target="_blank">Instagram</a>
-            <a href="https://t.me/caneli_barzani_pubg" target="_blank">Telegram</a>
-            <a href="mailto:destek@canelipubguc.com">E-Posta</a>
-        </div>
     </div>
 
-    <script>
-        // Geri sayım zamanlayıcısı
-        function startCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            let timeLeft = 3 * 60 * 60; // 3 saat
-            
-            const timer = setInterval(() => {
-                const hours = Math.floor(timeLeft / 3600);
-                const minutes = Math.floor((timeLeft % 3600) / 60);
-                const seconds = timeLeft % 60;
-                
-                countdownElement.textContent = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-                
-                timeLeft--;
-                
-                if (timeLeft < 0) {
-                    clearInterval(timer);
-                    countdownElement.textContent = "SİTEMİZ AÇILDI!";
-                    countdownElement.style.color = "#25D366";
-                }
-            }, 1000);
-        }
-        
-        // Sayfa yüklendiğinde çalışacak fonksiyonlar
-        document.addEventListener('DOMContentLoaded', startCountdown);
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
