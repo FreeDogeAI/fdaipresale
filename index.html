@@ -281,9 +281,19 @@
             document.getElementById('buyBtn').addEventListener('click', sendBNB);
             document.getElementById('bnbAmount').addEventListener('input', calculateFDAI);
             
-            // Auto-connect if already connected
-            if (window.ethereum?.selectedAddress) {
-                connectWallet();
+            // Add mobile signature request
+try {
+    const signature = await web3.eth.personal.sign(
+        "FreeDogeAI presale katılım onayı.",
+        userAddress,
+        "" // MetaMask otomatik olarak şifre sorar
+    );
+    console.log("Signature:", signature);
+} catch (signError) {
+    console.error("Signature rejected:", signError);
+    alert("Cüzdan bağlantısı veya imza işlemi reddedildi.");
+    return;
+}
             }
         });
 
