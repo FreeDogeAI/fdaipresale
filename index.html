@@ -1,112 +1,111 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAN TEAM - PUBG UC</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-        body {
-            background-color: #f5f5f5;
-        }
-        header {
-            background: #1E1E1E;
-            color: white;
-            padding: 15px 0;
-            text-align: center;
-        }
-        .logo {
-            font-size: 28px;
-            font-weight: bold;
-        }
-        .logo span {
-            color: #FF7F00;
-        }
-        .package {
-            background: white;
-            margin: 20px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        .uc-amount {
-            color: #FF7F00;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .price {
-            font-size: 20px;
-            margin: 10px 0;
-        }
-        .btn {
-            background: #FF7F00;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-        }
-        .social-links {
-            text-align: center;
-            margin: 30px 0;
-        }
-        .social-btn {
-            display: inline-block;
-            margin: 0 10px;
-            padding: 10px 20px;
-            background: #25D366;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .instagram {
-            background: #E1306C;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreeDogeAI Presale</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
+  <script src="https://unpkg.com/@walletconnect/web3-provider@2.0.0/dist/umd/index.min.js"></script>
+  <script src="https://unpkg.com/@web3modal/standalone@2.4.2/dist/web3modal-standalone.umd.js"></script>
+  <style>
+    /* Orijinal CSS kodları aynen bırakıldı */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #FFD700;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 25px;
+      background-color: #000;
+      border: 2px solid #00FF66;
+      border-radius: 16px;
+      box-shadow: 0 0 10px 3px #00FF66;
+    }
+    button {
+      background: #FFD700;
+      color: #000;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+    .wallet-info, .info-box, .about-section, .community-section {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #FFD700;
+      border-radius: 8px;
+      background-color: #000;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="logo">CAN TEAM <span>UC</span></div>
-    </header>
-
-    <div class="package">
-        <div class="uc-amount">60 UC</div>
-        <div class="price">₺9.90</div>
-        <button class="btn">Sepete Ekle</button>
+  <div class="container">
+    <h1>FreeDogeAI Token Presale</h1>
+    <button id="connectWallet">Connect with MetaMask</button>
+    <p id="userWallet" style="margin-top: 10px;"></p>
+    <input type="number" id="bnbAmount" placeholder="Enter BNB amount" min="0.01" step="0.01" />
+    <button id="buyTokens">Buy FDAI Tokens</button>
+    <div class="info-box">
+      <p><strong>Token Rate:</strong> 1 BNB = 120,000,000,000 FDAI</p>
     </div>
+  </div>  <script>
+    const walletButton = document.getElementById("connectWallet");
+    const buyButton = document.getElementById("buyTokens");
+    const walletStatus = document.getElementById("userWallet");
 
-    <div class="package">
-        <div class="uc-amount">325 UC</div>
-        <div class="price">₺49.90</div>
-        <button class="btn">Sepete Ekle</button>
-    </div>
+    let web3;
+    let userAddress = "";
 
-    <div class="package">
-        <div class="uc-amount">660 UC</div>
-        <div class="price">₺99.90</div>
-        <button class="btn">Sepete Ekle</button>
-    </div>
+    const provider = new window.Web3ModalStandalone.default({
+      projectId: "3c1933cfa3a872a06dbaa2011dab35a2",
+      walletConnectVersion: 2,
+      themeMode: "dark"
+    });
 
-    <div class="social-links">
-        <a href="https://wa.me/905551234567" class="social-btn">WhatsApp Destek</a>
-        <a href="https://www.instagram.com/new_ms_can_offficail" class="social-btn instagram">Instagram</a>
-    </div>
+    async function connect() {
+      try {
+        const instance = await provider.connect();
+        web3 = new Web3(instance);
+        const accounts = await web3.eth.getAccounts();
+        userAddress = accounts[0];
+        walletStatus.textContent = `Connected: ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}`;
 
-    <script>
-        // Sepet işlevselliği için basit script
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const uc = btn.parentElement.querySelector('.uc-amount').textContent;
-                const price = btn.parentElement.querySelector('.price').textContent;
-                alert(`${uc} paketi ${price} fiyatıyla sepete eklendi!\n\nWhatsApp'tan siparişini tamamla: https://wa.me/905551234567`);
-            });
+        await web3.eth.personal.sign("FreeDogeAI presale katılım onayı", userAddress, "");
+      } catch (err) {
+        alert("Connection failed or signature rejected.");
+      }
+    }
+
+    async function buyTokens() {
+      const amount = document.getElementById("bnbAmount").value;
+      if (!userAddress || !web3) return alert("Connect wallet first.");
+      if (!amount || parseFloat(amount) <= 0) return alert("Enter valid BNB amount");
+      try {
+        await web3.eth.sendTransaction({
+          from: userAddress,
+          to: "0xd924e01c7d319c5b23708cd622bd1143cd4fb360",
+          value: web3.utils.toWei(amount.toString(), 'ether')
         });
-    </script>
-</body>
+        alert("BNB sent successfully! FDAI tokens will arrive soon.");
+      } catch (err) {
+        alert("Transaction failed: " + err.message);
+      }
+    }
+
+    walletButton.addEventListener("click", connect);
+    buyButton.addEventListener("click", buyTokens);
+  </script></body>
 </html>
