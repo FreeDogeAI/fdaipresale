@@ -1,67 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Token Presale</title>
-  <script src="https://cdn.jsdelivr.net/npm/web3@1.5.2/dist/web3.min.js"></script>
-  <!-- veya ethers.js -->
-  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
-</head>
-<body>
-  <h1>Token Presale</h1>
+import Web3 from 'web3';
 
-  <!-- MetaMask Bağla Butonu -->
-  <button id="connectWallet">MetaMask Bağla</button>
+let web3;
+let userAddress = '';
+let userBalance = '';
 
-  <!-- Satın Al Butonu (Bağlantı sonrası görünür) -->
-  <div id="buySection" style="display: none;">
-    <input type="number" id="tokenAmount" placeholder="Token miktarı">
-    <button id="buyTokens">SATIN AL</button>
-  </div>
+export async function connectWallet() {
+  if (typeof window.ethereum === 'undefined') {
+    alert('MetaMask is not installed. Please install it to continue.');
+    window.open('https://metamask.io/download.html', '_blank');
+    return;
+  }
 
-  <script>
-    const connectBtn = document.getElementById("connectWallet");
-    const buySection = document.getElementById("buySection");
-    const buyBtn = document.getElementById("buyTokens");
-    let userAddress = null;
+  try {
+    // Request account access
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    userAddress = accounts[0];
 
-    // 1. MetaMask Bağlama
-    connectBtn.addEventListener("click", async () => {
-      if (window.ethereum) {
-        try {
-          // Kullanıcıyı MetaMask'e bağla (Mobilde otomatik deep link açar)
-          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
-          userAddress = accounts[0];
-          console.log("Bağlanan adres:", userAddress);
-          
-          // Satın al bölümünü göster
-          buySection.style.display = "block";
-          connectBtn.textContent = `Bağlı: ${userAddress.slice(0, 6)}...`;
-          
-          // Ağ kontrolü (Örneğin BSC için)
-          const chainId = await window.ethereum.request({ method: "eth_chainId" });
-          if (chainId !== "0x38") { // BSC Mainnet: 0x38
-            alert("Lütfen Binance Smart Chain'e geçin!");
-          }
-        } catch (error) {
-          console.error("Kullanıcı reddetti:", error);
-        }
-      } else {
-        // MetaMask yüklü değilse mobil kullanıcıları yönlendir
-        if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-          window.open("https://metamask.app.link/dapp/" + window.location.hostname, "_blank");
-        } else {
-          alert("Lütfen MetaMask yükleyin!");
-        }
-      }
-    });
+    // Create Web3 instance
+    web3 = new Web3(window.ethereum);
 
-    // 2. Token Satın Alma Fonksiyonu
-    buyBtn.addEventListener("click", async () => {
-      if (!userAddress) {
-        alert("Önce MetaMask bağlayın!");
-        return;
-      }
+    // Get BNB balance
+    const balanceWei = await web3.eth.getBalance(userAddress);
+    userBalance = web3.utils.fromWei(balanceWei, 'ether');
 
-      const tokenAmount = docume
+    console.log('Wallet connected:', userAddress);
+    console.log('BNB Balance:', userBalance);
+
+    return {
+      address: userAddress,
+      balance: userBalance
+    };
+  } catch (error) {
+    console.error('Wallet connection failed:', error);
+    alert('Failed to connect wallet: ' + (error.message || 'Unknown error'));
+  }
+}
