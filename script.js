@@ -1,32 +1,332 @@
-// Configuration const CONFIG = { RECEIVE_WALLET: "0xd924e01c7d319c5b23708cd622bd1143cd4fb360", TOKENS_PER_BNB: 120000000000, BSC_CHAIN_ID: 56 };
+import React, { useState, useEffect } from 'react';
+import Web3 from 'web3';
+import './App.css';
 
-let web3; let userAddress = "";
+const APP_CONFIG = {
+  RECEIVER_ADDRESS: '0xd924e01c7d319c5B23708Cd622bD1143CD4Fb360',
+  DEFAULT_AMOUNT: 0.1,
+  COMPANY_NAME: "Crypto Payment App",
+  BSC_NETWORK: {
+    chainId: '0x38',
+    chainName: 'Binance Smart Chain',
+    nativeCurrency: {
+      name: 'BNB',
+      symbol: 'BNB',
+      decimals: 18
+    },
+    rpcUrls: ['https://bsc-dataseed.binance.org/'],
+    blockExplorerUrls: ['https://bscscan.com/']
+  }
+};
 
-const provider = new window.Web3ModalStandalone.default({ projectId: "3c193cfa3827a6dba2011dab35a2", walletConnectVersion: 2, themeMode: "dark" });
+const App = () => {
+  const [state, setState] = useState({
+    account: '',
+    balance: '0',
+    network: '',
+    paymentAmount: APP_CONFIG.DEFAULT_AMOUNT.toString(),
+    transactionHash: '',
+    isMobile: false,
+    isLoading: false,
+    isConnected: false,
+    error: null
+  });
 
-document.getElementById('connectWalletBtn').addEventListener('click', async () => { try { const instance = await provider.connect(); web3 = new Web3(instance);
+  useEffect(() => {
+    const detectMobile = () => {
+      return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    };
 
-const accounts = await web3.eth.getAccounts();
-userAddress = accounts[0];
+    const initializeApp = async () => {
+      try {
+        setState(prev => ({ ...prev, isMobile: detectMobile() }));
+        
+        if (window.ethereum) {
+          await setupEventListeners();
+          await checkWalletConnection();
+        }
+      } catch (error) {
+        handleError(error, 'Initialization error');
+      }
+    };
 
-// Mobil imza isteği
-await web3.eth.personal.sign("FreeDogeAI presale katılım onayı.", userAddress, "");
+    initializeApp();
 
-updateWalletUI();
+    return () => {
+      cleanupEventListeners();
+    };
+  }, []);
 
-} catch (error) { console.error("signature rejected.", error); alert("Bağlantı başarısız veya imza işlemi reddedildi."); } });
+  const checkWalletConnection = async () => {
+    try {
+      const accounts = await window.ethereum.request({ method: 'eth_accounts' });
+      if (accounts.length > 0) {
+        await setupWallet(accounts[0]);
+      }
+    } catch (error) {
+      handleError(error, 'Wallet connection check failed');
+    }
+  };
 
-document.getElementById('bnbAmount').addEventListener('input', calculateFDAI); document.getElementById('buyBtn').addEventListener('click', sendBNB);
+  const connectWallet = async () => {
+    try {
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
+      
+      if (state.isMobile) {
+        window.location.href = `https://metamask.app.link/dapp/${window.location.hostname}`;
+        await new Promise(resolve => setTimeout(resolve, 2000));
+      }
 
-function updateWalletUI() { const shortAddress = ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}; document.getElementById('walletAddress').textContent = shortAddress; document.getElementById('userTokenAddress').textContent = shortAddress; document.getElementById('walletInfo').style.display = 'block'; document.getElementById('connectWalletBtn').textContent = '✅ Connected'; document.getElementById('buyBtn').disabled = false;
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      await switchToBscNetwork();
+      await setupWallet(accounts[0]);
+      
+      setState(prev => ({ ...prev, isConnected: true }));
+    } catch (error) {
+      handleError(error, 'Wallet connection failed');
+    } finally {
+      setState(prev => ({ ...prev, isLoading: false }));
+    }
+  };
 
-web3.eth.getBalance(userAddress).then(balance => { const bnbBalance = web3.utils.fromWei(balance, 'ether'); document.getElementById('bnbBalance').textContent = ${parseFloat(bnbBalance).toFixed(6)} BNB; }); }
+  const setupWallet = async (account) => {
+    try {
+      const web3 = new Web3(window.ethereum);
+      const balanceWei = await web3.eth.getBalance(account);
+      const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+      
+      setState(prev => ({
+        ...prev,
+        account,
+        balance: web3.utils.fromWei(balanceWei, 'ether'),
+        network: getNetworkName(chainId),
+        error: null
+      }));
+    } catch (error) {
+      handleError(error, 'Wallet setup failed');
+    }
+  };
 
-function calculateFDAI() { const amount = parseFloat(document.getElementById('bnbAmount').value) || 0; document.getElementById('fdaiAmount').textContent = (amount * CONFIG.TOKENS_PER_BNB).toLocaleString(); }
+  const switchToBscNetwork = async () => {
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: APP_CONFIG.BSC_NETWORK.chainId }],
+      });
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        try {
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [APP_CONFIG.BSC_NETWORK],
+          });
+        } catch (addError) {
+          throw new Error('Failed to add BSC network to MetaMask');
+        }
+      }
+    }
+  };
 
-async function sendBNB() { const bnbAmount = parseFloat(document.getElementById('bnbAmount').value); if (!bnbAmount || bnbAmount <= 0) { alert("Lütfen geçerli bir miktar girin!"); return; } try { const weiAmount = web3.utils.toWei(bnbAmount.toString(), 'ether'); await web3.eth.sendTransaction({ from: userAddress, to: CONFIG.RECEIVE_WALLET, value: weiAmount });
+  const handlePayment = async () => {
+    try {
+      validatePayment();
+      
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
+      
+      const web3 = new Web3(window.ethereum);
+      const amountInWei = web3.utils.toWei(state.paymentAmount, 'ether');
+      
+      const tx = await web3.eth.sendTransaction({
+        from: state.account,
+        to: APP_CONFIG.RECEIVER_ADDRESS,
+        value: amountInWei,
+        gas: 21000
+      });
 
-alert(`✅ ${bnbAmount} BNB başarıyla gönderildi!\n\nAlacak: ${(bnbAmount * CONFIG.TOKENS_PER_BNB).toLocaleString()} FDAI`);
+      const newBalance = await web3.eth.getBalance(state.account);
+      
+      setState(prev => ({
+        ...prev,
+        transactionHash: tx.transactionHash,
+        balance: web3.utils.fromWei(newBalance, 'ether'),
+        isLoading: false
+      }));
 
-} catch (error) { console.error("İşlem başarısız:", error); alert("İşlem başarısız: " + (error.message || error)); } }
+    } catch (error) {
+      handleError(error, 'Payment failed');
+    } finally {
+      setState(prev => ({ ...prev, isLoading: false }));
+    }
+  };
 
+  const validatePayment = () => {
+    if (!state.account) {
+      throw new Error('Please connect your wallet first');
+    }
+
+    const amount = parseFloat(state.paymentAmount);
+    if (isNaN(amount) || amount <= 0) {
+      throw new Error('Please enter a valid BNB amount');
+    }
+  };
+
+  const setupEventListeners = () => {
+    if (!window.ethereum) return;
+
+    const handleAccountsChanged = (accounts) => {
+      if (accounts.length > 0) {
+        setupWallet(accounts[0]);
+      } else {
+        resetWalletState();
+      }
+    };
+
+    const handleChainChanged = () => {
+      window.location.reload();
+    };
+
+    window.ethereum.on('accountsChanged', handleAccountsChanged);
+    window.ethereum.on('chainChanged', handleChainChanged);
+
+    return () => {
+      window.ethereum.removeListener('accountsChanged', handleAccountsChanged);
+      window.ethereum.removeListener('chainChanged', handleChainChanged);
+    };
+  };
+
+  const cleanupEventListeners = () => {
+    if (window.ethereum) {
+      window.ethereum.removeAllListeners('accountsChanged');
+      window.ethereum.removeAllListeners('chainChanged');
+    }
+  };
+
+  const resetWalletState = () => {
+    setState({
+      account: '',
+      balance: '0',
+      network: '',
+      paymentAmount: APP_CONFIG.DEFAULT_AMOUNT.toString(),
+      transactionHash: '',
+      isMobile: false,
+      isLoading: false,
+      isConnected: false,
+      error: null
+    });
+  };
+
+  const handleError = (error, context) => {
+    console.error(`${context}:`, error);
+    setState(prev => ({
+      ...prev,
+      error: error.message,
+      isLoading: false
+    }));
+    alert(`${context}: ${error.message}`);
+  };
+
+  const getNetworkName = (chainId) => {
+    switch (chainId) {
+      case '0x1': return 'Ethereum Mainnet';
+      case '0x38': return 'Binance Smart Chain';
+      case '0x61': return 'BSC Testnet';
+      case '0x89': return 'Polygon Mainnet';
+      default: return `Network (${chainId})`;
+    }
+  };
+
+  const formatAddress = (address) => {
+    return address ? `${address.substring(0, 6)}...${address.substring(address.length - 4)}` : '';
+  };
+
+  return (
+    <div className="app-container">
+      <header className="app-header">
+        <h1>{APP_CONFIG.COMPANY_NAME}</h1>
+        <p className="app-subtitle">BNB Payment Gateway</p>
+      </header>
+      
+      <main className="app-content">
+        {!state.isConnected ? (
+          <div className="connection-section">
+            <button 
+              onClick={connectWallet} 
+              className="connect-button"
+              disabled={state.isLoading}
+            >
+              {state.isLoading ? 'Connecting...' : 'Connect Wallet'}
+            </button>
+            {state.error && <p className="error-message">{state.error}</p>}
+          </div>
+        ) : (
+          <div className="wallet-dashboard">
+            <section className="wallet-info">
+              <h2>Wallet Details</h2>
+              <div className="info-row">
+                <span>Address:</span>
+                <span>{formatAddress(state.account)}</span>
+              </div>
+              <div className="info-row">
+                <span>Network:</span>
+                <span>{state.network}</span>
+              </div>
+              <div className="info-row">
+                <span>Balance:</span>
+                <span>{parseFloat(state.balance).toFixed(4)} BNB</span>
+              </div>
+            </section>
+
+            <section className="payment-section">
+              <h2>Send Payment</h2>
+              <div className="input-group">
+                <label htmlFor="amount">BNB Amount:</label>
+                <input
+                  id="amount"
+                  type="number"
+                  value={state.paymentAmount}
+                  onChange={(e) => setState(prev => ({ ...prev, paymentAmount: e.target.value }))}
+                  min="0.0001"
+                  step="0.0001"
+                  disabled={state.isLoading}
+                />
+              </div>
+
+              <div className="recipient-info">
+                <h3>Recipient Details</h3>
+                <div className="info-row">
+                  <span>Address:</span>
+                  <span>{formatAddress(APP_CONFIG.RECEIVER_ADDRESS)}</span>
+                </div>
+              </div>
+
+              <button 
+                onClick={handlePayment} 
+                className="payment-button"
+                disabled={state.isLoading}
+              >
+                {state.isLoading ? 'Processing...' : `Send ${state.paymentAmount} BNB`}
+              </button>
+              {state.error && <p className="error-message">{state.error}</p>}
+            </section>
+
+            {state.transactionHash && (
+              <section className="transaction-info">
+                <h3>Transaction Details</h3>
+                <a
+                  href={`https://bscscan.com/tx/${state.transactionHash}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transaction-link"
+                >
+                  View on BSCScan
+                </a>
+              </section>
+            )}
+          </div>
+        )}
+      </main>
+    </div>
+  );
+};
+
+export default App;
