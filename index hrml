@@ -1,154 +1,160 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Doge AI Token Pre-sale</title>
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.8.0/dist/web3.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #000000;
-            margin: 0;
-            padding: 20px;
-            color: #FFD700;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #000000;
-            padding: 20px 15px;
-            border-radius: 16px;
-            border: 2px solid #00FF66;
-            box-shadow: 0 0 10px 3px #00FF66;
-        }
-        .logo-container {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-        .logo-container img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        button {
-            background: #25D366;
-            color: white;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            margin-top: 8px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background: #1DA851;
-        }
-        button:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-        }
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 14px;
-            background-color: #222;
-            color: #FFD700;
-        }
-        .wallet-info {
-            background-color: #000000;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 12px 0;
-            word-break: break-word;
-            font-family: monospace;
-            border: 1px solid #FFD700;
-            color: #FFD700;
-            font-size: 13px;
-        }
-        .info-box {
-            background-color: #000000;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #FFD700;
-            color: #FFD700;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-        .payment-method {
-            margin: 12px 0;
-        }
-        a, u {
-            text-decoration: none !important;
-            color: #FFD700 !important;
-            background-color: rgba(255, 215, 0, 0.2);
-            padding: 2px 4px;
-            border-radius: 3px;
-            transition: background-color 0.3s;
-        }
-        a:hover, u:hover {
-            background-color: rgba(255, 215, 0, 0.4);
-        }
-        .calculation-result {
-            margin: 5px 0;
-            font-size: 14px;
-        }
-    </style>
+    <title>PUBG Türkiye - UC Satın Al | Resmi Distribütör</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<div id="metamaskRedirect" class="metamask-redirect">
-    <a id="openInMetamask" style="color: #FFD700; text-decoration: none;"></a>
-</div>
-<div class="container">
-    <div class="logo-container">
-        <img src="logo.png" alt="FreeDogeAI Logo">
-    </div>
-    <h2 style="text-align:center; margin-bottom: 15px;">FreeDogeAI Presale</h2><div class="payment-method">
-    <label for="paymentMethod"><strong>Payment Method:</strong></label>
-    <select id="paymentMethod">
-        <option value="bnb">BNB</option>
-        <option value="usdt">USDT (BEP-20)</option>
-    </select>
-</div>
+    <!-- Üst Menü -->
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="logo.png" alt="PUBG Türkiye">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Ana Sayfa</a></li>
+                    <li><a href="#">UC Paketleri</a></li>
+                    <li><a href="#">Nasıl Çalışır?</a></li>
+                    <li><a href="#">SSS</a></li>
+                    <li><a href="#">İletişim</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="#" class="btn-login">Giriş Yap</a>
+                <a href="#" class="btn-register">Kayıt Ol</a>
+            </div>
+        </div>
+    </header>
 
-<p id="rateInfo">1 BNB = 120,000,000,000 FDAI</p>
-<button id="connectWalletBtn">🔗 Connect with MetaMask</button>
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="container">
+            <h1>PUBG Mobile UC Satın Al</h1>
+            <p>Anında teslimat ile en uygun fiyatlar!</p>
+            <a href="#" class="btn-primary">Hemen Al</a>
+        </div>
+    </section>
 
-<div id="walletInfo" style="display: none;">
-    <div class="wallet-info">
-        <p><strong>Address:</strong> <span id="walletAddress"></span></p>
-        <p><strong>BNB Balance:</strong> <span id="bnbBalance"></span></p>
-        <p><strong>USDT Balance:</strong> <span id="usdtBalance"></span></p>
-    </div>
-</div>
+    <!-- UC Paketleri -->
+    <section class="packages">
+        <div class="container">
+            <h2>POPÜLER UC PAKETLERİ</h2>
+            <div class="package-grid">
+                <!-- Paket 1 -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>600 UC</h3>
+                    </div>
+                    <div class="package-price">
+                        <span class="old-price">120 TL</span>
+                        <span class="new-price">99 TL</span>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-bolt"></i> 5 Dakikada Teslimat</li>
+                        <li><i class="fas fa-shield-alt"></i> Güvenli Ödeme</li>
+                    </ul>
+                    <a href="#" class="btn-buy">Satın Al</a>
+                </div>
 
-<label for="amount"><strong>Amount:</strong></label>
-<input type="number" id="amount" placeholder="Enter amount (BNB or USDT)" step="0.01" min="0.01">
+                <!-- Paket 2 (Öne Çıkan) -->
+                <div class="package-card featured">
+                    <div class="package-badge">EN ÇOK SATAN</div>
+                    <div class="package-header">
+                        <h3>3,000 UC</h3>
+                    </div>
+                    <div class="package-price">
+                        <span class="old-price">450 TL</span>
+                        <span class="new-price">399 TL</span>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-bolt"></i> 5 Dakikada Teslimat</li>
+                        <li><i class="fas fa-gift"></i> +100 UC Hediye</li>
+                    </ul>
+                    <a href="#" class="btn-buy">Satın Al</a>
+                </div>
 
-<div class="calculation-result">
-    <strong>You will receive:</strong> <span id="fdaiAmount">0</span> FDAI
-</div>
+                <!-- Paket 3 -->
+                <div class="package-card">
+                    <div class="package-header">
+                        <h3>6,000 UC</h3>
+                    </div>
+                    <div class="package-price">
+                        <span class="old-price">900 TL</span>
+                        <span class="new-price">799 TL</span>
+                    </div>
+                    <ul class="package-features">
+                        <li><i class="fas fa-bolt"></i> 5 Dakikada Teslimat</li>
+                        <li><i class="fas fa-crown"></i> VIP Destek</li>
+                    </ul>
+                    <a href="#" class="btn-buy">Satın Al</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<button id="buyBtn" disabled>🚀 Buy FDAI Tokens</button>
+    <!-- Özellikler -->
+    <section class="features">
+        <div class="container">
+            <h2>NEDEN BİZİ SEÇMELİSİNİZ?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Anında Teslimat</h3>
+                    <p>Siparişiniz 5 dakika içinde hesabınıza yüklenir.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Güvenli Ödeme</h3>
+                    <p>256-bit SSL ile korunan ödeme sistemleri.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>7/24 Destek</h3>
+                    <p>WhatsApp ve canlı destek ile yanınızdayız.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="info-box">
-    <h3>Important Information</h3>
-    <p>After your token purchase, your tokens will be reflected in your wallet within 24 hours.</p>
-    <div style="background-color:#001f3f; color:#00ccff; border: 2px solid #00ccff; border-radius: 10px; padding: 15px; text-align: center; font-weight: bold; margin-top: 20px;">
-        Please make sure you are connected to the <span style="color:#00ffff;">BSC (Binance Smart Chain)</span> network.
-    </div>
-    <p><strong>NOTE:</strong> If FDAI tokens do not appear, add this contract address:</p>
-    <div class="wallet-info" style="background-color: #000000; border: 2px dashed #FFD700; color: #00FFCC; font-weight: bold; font-size: 16px; padding: 15px; border-radius: 10px; text-align: center;">
-        0x8161698A74F2ea0035B9912ED60140893Ac0f39C
-    </div>
-</div>
-
-</div>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Hızlı Linkler</h4>
+                    <ul>
+                        <li><a href="#">Ana Sayfa</a></li>
+                        <li><a href="#">UC Paketleri</a></li>
+                        <li><a href="#">Hesap Yükleme</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Yardım</h4>
+                    <ul>
+                        <li><a href="#">SSS</a></li>
+                        <li><a href="#">İade Politikası</a></li>
+                        <li><a href="#">Kullanım Koşulları</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>İletişim</h4>
+                    <ul>
+                        <li><i class="fab fa-whatsapp"></i> WhatsApp: +90 555 123 4567</li>
+                        <li><i class="fas fa-envelope"></i> Email: destek@pubgturkiye.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="payment-methods">
+                <img src="payment-methods.png" alt="Ödeme Yöntemleri">
+            </div>
+            <div class="copyright">
+                <p>© 2023 PUBG Türkiye. Tüm hakları saklıdır.</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
