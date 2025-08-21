@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mavi Amiral — İletişim</title>
   <link rel="icon" href="logo.png" type="image/png">
+  <!-- Stil dosyan -->
+  <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
 </head>
 <body>
@@ -21,19 +23,23 @@
 </header>
 
 <section>
-  <h1>İletişim — Siber Kudret ve Özgürlük</h1>
+  <h1 class="section-title">İletişim — Siber Kudret ve Özgürlük</h1>
   <p>Bizimle iletişim kurmak, neon ışıklar altında özgürce kendini ifade etmek demektir. Her mesaj, her öneri, her merhaba bir gökkuşağı gibi bizim için değerlidir. 🌈</p>
 
-  <div>
-    <div>
+  <div class="cards">
+    <!-- Sol kısım -->
+    <div class="card">
       <h3>Bize Ulaşın</h3>
       <p>Kudretli siber evrende her kullanıcıya kulak veriyoruz. Sorularınız, önerileriniz veya sadece selam vermek için bile yazabilirsiniz.</p>
-      <div>
-        <img src="https://placehold.co/600x400/1a73e8/white?text=İletişim+Resmi" alt="Mavi Amiral İletişim" width="600" height="400">
+      <div style="margin-top:16px;">
+        <img src="https://placehold.co/600x400/111433/7aa2ff?text=Siber+Evrende+Bağlantı" 
+             alt="Mavi Amiral İletişim — Siber Evrende Bağlantı" 
+             width="100%" height="auto" style="border-radius:12px;">
       </div>
     </div>
 
-    <div>
+    <!-- Sağ kısım -->
+    <div class="card">
       <h3>Form ile Mesaj Gönder</h3>
       <p>Aşağıdaki formu doldurarak bize doğrudan mesaj gönderebilirsiniz. En kısa sürede sizinle iletişime geçeceğiz.</p>
       
@@ -50,16 +56,16 @@
         <label for="message">Mesaj:</label>
         <textarea id="message" name="message" rows="5" placeholder="Mesajınızı buraya yazın..." required></textarea>
 
-        <button type="submit">Gönder 🌈</button>
+        <button type="submit" class="btn">Gönder 🌈</button>
       </form>
 
-      <div id="thankMessage" style="display:none; margin-top:16px; font-weight:700; text-align:center;">
+      <div id="thankMessage" style="display:none; margin-top:16px; font-weight:700; text-align:center; color:var(--highlight);">
         Mesajınız bize ulaştı! 🌈 Teşekkür ederiz, Mavi Amiral sizinle 🌊
       </div>
     </div>
   </div>
 
-  <p>Her mesaj, Mavi Amiral'in kudretiyle karşılanır. Korkutucu olabiliriz ama aynı zamanda tüm kullanıcılarımız için özgürlük ve aşk doluyuz. 🌈</p>
+  <p style="margin-top:40px; text-align:center;">Her mesaj, Mavi Amiral'in kudretiyle karşılanır. Korkutucu olabiliriz ama aynı zamanda tüm kullanıcılarımız için özgürlük ve aşk doluyuz. 🌈</p>
 </section>
 
 <footer>
