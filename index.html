@@ -1,189 +1,117 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mavi Amiral | Çok Sayfalı Site</title>
-    <style>
-        /* Genel stiller */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #0a1929;
-            color: #e0e0e0;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        /* Navigasyon stilleri */
-        nav {
-            background-color: rgba(10, 25, 41, 0.9);
-            padding: 20px 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: center;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        nav li {
-            margin: 0 15px;
-        }
-        
-        nav a {
-            color: #8eb3d8;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 15px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-        
-        nav a:hover, nav a.active {
-            background-color: rgba(123, 168, 214, 0.2);
-            color: #ffffff;
-        }
-        
-        /* Sayfa içerik stilleri */
-        .page {
-            display: none;
-            padding: 40px 0;
-            min-height: 70vh;
-        }
-        
-        .page.active {
-            display: block;
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        h1 {
-            color: #8eb3d8;
-            border-bottom: 2px solid #4a7bab;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        
-        .content-box {
-            background-color: rgba(15, 35, 65, 0.3);
-            border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
-            border: 1px solid rgba(123, 168, 214, 0.2);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mavi Amiral — Siber Kudret ve Özgürlük</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  <script defer src="script.js"></script>
+  <style>
+    :root {
+      --bg:#0b0f1f;
+      --card:#111433;
+      --text:#e9edf3;
+      --accent:#7aa2ff;
+      --highlight:#ff6ec7;
+      --rainbow: linear-gradient(90deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8f00ff);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--text);}
+    header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:#0c101f;border-bottom:1px solid #1d1f33;}
+    header .logo{font-weight:800;font-size:1.5rem;color:var(--accent);}
+    nav a{margin-left:16px;color:var(--text);text-decoration:none;font-weight:600;}
+    nav a:hover{color:var(--highlight);}
+    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:90vh;text-align:center;position:relative;overflow:hidden;}
+    .hero h1{font-size:3rem;text-transform:uppercase;margin:0;line-height:1.2;color:var(--accent);}
+    .hero p{font-size:1.2rem;margin:16px 0;color:var(--text);}
+    .hero .rainbow-text{
+      background: var(--rainbow);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: rainbow 5s linear infinite;
+    }
+    @keyframes rainbow {
+      0%{background-position:0%}
+      100%{background-position:100%}
+    }
+    .btn{padding:12px 24px;margin:8px;background:var(--accent);color:#0b0f1f;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:0.3s;}
+    .btn:hover{background:var(--highlight);}
+    section{padding:80px 16px;max-width:1000px;margin:0 auto;}
+    .section-title{font-size:2rem;font-weight:700;text-align:center;margin-bottom:40px;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+    .card{background:var(--card);padding:24px;border-radius:16px;box-shadow:0 0 20px rgba(0,0,0,0.6);transition:0.3s;}
+    .card:hover{transform:translateY(-8px);}
+    footer{padding:24px;text-align:center;border-top:1px solid #1d1f33;color:var(--text);}
+  </style>
 </head>
 <body>
-    <!-- Navigasyon -->
-    <nav>
-        <ul>
-            <li><a href="#" class="nav-link active" data-page="home">Ana Sayfa</a></li>
-            <li><a href="#" class="nav-link" data-page="about">Hakkımızda</a></li>
-            <li><a href="#" class="nav-link" data-page="services">Hizmetler</a></li>
-            <li><a href="#" class="nav-link" data-page="contact">İletişim</a></li>
-        </ul>
-    </nav>
 
-    <div class="container">
-        <!-- Ana Sayfa -->
-        <div id="home" class="page active">
-            <h1>Ana Sayfa</h1>
-            <div class="content-box">
-                <p>Mavi Amiral'e hoş geldiniz. Stratejiler derinliklerden şekillenir, yüzeye kusursuz çıkar.</p>
-                <p>Karadaki gürültünün ötesinde, denizlerin stratejik sessizliğinde konuşlanmış durumdayım.</p>
-            </div>
-        </div>
+<header>
+  <div class="logo">🌊 Mavi Amiral</div>
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="about.html">Hakkımızda</a>
+    <a href="services.html">Hizmetler</a>
+    <a href="blog.html">Blog</a>
+    <a href="contact.html">İletişim</a>
+  </nav>
+</header>
 
-        <!-- Hakkımızda Sayfası -->
-        <div id="about" class="page">
-            <h1>Hakkımızda</h1>
-            <div class="content-box">
-                <p>Bizler derin stratejilerle karmaşık problemlere çözümler üreten bir ekibiz.</p>
-                <p>Sessiz derinlikler, keskin hamleler. Haritanın ötesini görenler için.</p>
-            </div>
-        </div>
+<section class="hero">
+  <h1>Mavi Amiral</h1>
+  <p class="rainbow-text">Güç, korku ve özgürlüğün birleştiği siber evrende bir aşk hikayesi...</p>
+  <div>
+    <button class="btn" onclick="location.href='services.html'">Hizmetlerimizi Keşfet</button>
+    <button class="btn" onclick="location.href='contact.html'">İletişim Kur</button>
+  </div>
+</section>
 
-        <!-- Hizmetler Sayfası -->
-        <div id="services" class="page">
-            <h1>Hizmetlerimiz</h1>
-            <div class="content-box">
-                <h3>Stratejik Planlama</h3>
-                <p>Karmaşık durumlarda uzun vadeli stratejiler geliştirerek rakiplerinizin önüne geçin.</p>
-            </div>
-            <div class="content-box">
-                <h3>Deniz Operasyonları</h3>
-                <p>Denizlerdeki hakimiyet, küresel gücün temelidir.</p>
-            </div>
-        </div>
-
-        <!-- İletişim Sayfası -->
-        <div id="contact" class="page">
-            <h1>İletişim</h1>
-            <div class="content-box">
-                <p>Bizimle iletişime geçmek için:</p>
-                <p>Email: info@maviamiral.com</p>
-                <p>Telefon: +90 555 123 45 67</p>
-                <p>Adres: Denizler Caddesi, Strateji Limanı</p>
-            </div>
-        </div>
+<section>
+  <h2 class="section-title">Siber Kudretin İzinde</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>İlahi Güç</h3>
+      <p>Gökyüzünden akan neon ışıklar gibi kudretimiz, tüm engelleri aşıyor. Karanlık ve aydınlık bir arada, Mavi Amiral’in kudretiyle varlığın ötesine geçiyoruz.</p>
     </div>
+    <div class="card">
+      <h3>Korku ve Gizem</h3>
+      <p>Siber evrende sessizlik yok, sadece fısıltılar var. Düşmanlarınız nefesinizi hissetsin, çünkü burada her tık, her veri izleniyor ve kudretin boyutu büyüyor.</p>
+    </div>
+    <div class="card">
+      <h3>Aşk ve Özgürlük 🌈</h3>
+      <p>Gökkuşağının tüm renkleriyle özgürlüğü kucaklıyoruz. Kim olduğunuzun önemi yok; kalbinizin yönünü takip edin, aşkın ve çeşitliliğin kudretine teslim olun.</p>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Sayfalar arası geçiş için JavaScript
-        document.addEventListener('DOMContentLoaded', function() {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const pages = document.querySelectorAll('.page');
-            
-            // Her navigasyon linki için tıklama olayı ekle
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    
-                    // Tıklanan linkin hangi sayfaya ait olduğunu al
-                    const targetPage = this.getAttribute('data-page');
-                    
-                    // Tüm sayfaları ve linkleri pasif yap
-                    pages.forEach(page => page.classList.remove('active'));
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    
-                    // Hedef sayfayı ve linki aktif yap
-                    document.getElementById(targetPage).classList.add('active');
-                    this.classList.add('active');
-                    
-                    // URL'yi güncelle (isteğe bağlı)
-                    window.history.pushState({}, '', `#${targetPage}`);
-                });
-            });
-            
-            // Sayfa yüklendiğinde hash değerine göre sayfa aç
-            const hash = window.location.hash.substring(1);
-            if (hash) {
-                const targetPage = document.getElementById(hash);
-                if (targetPage) {
-                    pages.forEach(page => page.classList.remove('active'));
-                    navLinks.forEach(link => link.classList.remove('active'));
-                    
-                    targetPage.classList.add('active');
-                    document.querySelector(`[data-page="${hash}"]`).classList.add('active');
-                }
-            }
-        });
-    </script>
+<section>
+  <h2 class="section-title">Siber Günlük</h2>
+  <p>Burada her saniye, her veri bir hikaye anlatır. Her satır kod, her neon ışık bir duyguyu yansıtır: Korku, güç, aşk, özgürlük...</p>
+  <p>Ne kadar karanlık olursa olsun, her hikaye gökkuşağının bir rengiyle aydınlanır. Çünkü Mavi Amiral, hem kudret hem de umut demektir.</p>
+</section>
+
+<section>
+  <h2 class="section-title">Görevlerimiz</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>Siber Hakimiyet</h3>
+      <p>Tüm dijital evreni kontrol altında tutmak, düşmanları korkutmak ve kudreti göstermek bizim işimiz.</p>
+    </div>
+    <div class="card">
+      <h3>Özgürlük ve Aşk</h3>
+      <p>Her kullanıcı, her ruh özgürdür. Kimlik, cinsiyet, aşk veya renk; burada herkes kendi kudretini bulur.</p>
+    </div>
+    <div class="card">
+      <h3>Gökkuşağı Manifestosu</h3>
+      <p>Farklılık güzeldir. Farklı renkler bir araya geldiğinde, korkutucu ama bir o kadar da büyüleyici bir armoni doğar.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Mavi Amiral. Tüm kudret ve özgürlük hakları saklıdır 🌈</p>
+</footer>
+
 </body>
 </html>
