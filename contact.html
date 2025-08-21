@@ -7,6 +7,32 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="logo.png" type="image/png">
   <script defer src="script.js"></script>
+  <style>
+    :root {
+      --bg:#0b0f1f;
+      --card:#111433;
+      --text:#e9edf3;
+      --accent:#7aa2ff;
+      --highlight:#ff6ec7;
+      --rainbow: linear-gradient(90deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8f00ff);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--text);}
+    header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:#0c101f;border-bottom:1px solid #1d1f33;}
+    header .logo{font-weight:800;font-size:1.5rem;color:var(--accent);}
+    nav a{margin-left:16px;color:var(--text);text-decoration:none;font-weight:600;}
+    nav a.active{color:var(--highlight);}
+    nav a:hover{color:var(--highlight);}
+    section{padding:80px 16px;max-width:1000px;margin:0 auto;}
+    .section-title{font-size:2rem;font-weight:700;text-align:center;margin-bottom:40px;}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
+    .card{background:var(--card);padding:24px;border-radius:16px;box-shadow:0 0 20px rgba(0,0,0,0.6);transition:0.3s;}
+    .card:hover{transform:translateY(-8px);}
+    input, textarea{padding:12px;margin:8px 0;border-radius:8px;border:none;outline:none;font-size:1rem;}
+    button.btn{padding:12px 24px;margin-top:8px;background:var(--accent);color:#0b0f1f;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:0.3s;}
+    button.btn:hover{background:var(--highlight);}
+    footer{padding:24px;text-align:center;border-top:1px solid #1d1f33;color:var(--text);}
+  </style>
 </head>
 <body>
 
@@ -58,6 +84,35 @@
 <footer>
   <p>© 2025 Mavi Amiral. Kudret, aşk ve özgürlük burada bir arada 🌈</p>
 </footer>
+
+<script>
+  // Contact form submit handling
+  const contactForm = document.getElementById('contactForm');
+  const thankMessage = document.getElementById('thankMessage');
+
+  if(contactForm && thankMessage){
+    contactForm.addEventListener('submit', function(e){
+      e.preventDefault(); // sayfa yenilenmesini engelle
+      const formData = new FormData(contactForm);
+      fetch(contactForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      }).then(response => {
+        if(response.ok){
+          contactForm.style.display = 'none';
+          thankMessage.style.display = 'block';
+        } else {
+          alert("Gönderimde hata oluştu. Lütfen tekrar deneyin.");
+        }
+      }).catch(error => {
+        alert("Bir hata oluştu. Lütfen tekrar deneyin.");
+      });
+    });
+  }
+</script>
 
 </body>
 </html>
