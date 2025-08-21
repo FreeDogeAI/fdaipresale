@@ -3,158 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PUBG Türkiye - UC Satın Al | Resmi Distribütör</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Mavi Amiral | Çok Sayfalı Site</title>
+    <style>
+        /* Genel stiller */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0a1929;
+            color: #e0e0e0;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Navigasyon stilleri */
+        nav {
+            background-color: rgba(10, 25, 41, 0.9);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        nav li {
+            margin: 0 15px;
+        }
+        
+        nav a {
+            color: #8eb3d8;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(123, 168, 214, 0.2);
+            color: #ffffff;
+        }
+        
+        /* Sayfa içerik stilleri */
+        .page {
+            display: none;
+            padding: 40px 0;
+            min-height: 70vh;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        h1 {
+            color: #8eb3d8;
+            border-bottom: 2px solid #4a7bab;
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+        
+        .content-box {
+            background-color: rgba(15, 35, 65, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(123, 168, 214, 0.2);
+        }
+    </style>
 </head>
 <body>
-    <!-- Üst Menü -->
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="logo.png" alt="PUBG Türkiye">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Ana Sayfa</a></li>
-                    <li><a href="#">UC Paketleri</a></li>
-                    <li><a href="#">Nasıl Çalışır?</a></li>
-                    <li><a href="#">SSS</a></li>
-                    <li><a href="#">İletişim</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <a href="#" class="btn-login">Giriş Yap</a>
-                <a href="#" class="btn-register">Kayıt Ol</a>
+    <!-- Navigasyon -->
+    <nav>
+        <ul>
+            <li><a href="#" class="nav-link active" data-page="home">Ana Sayfa</a></li>
+            <li><a href="#" class="nav-link" data-page="about">Hakkımızda</a></li>
+            <li><a href="#" class="nav-link" data-page="services">Hizmetler</a></li>
+            <li><a href="#" class="nav-link" data-page="contact">İletişim</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Ana Sayfa -->
+        <div id="home" class="page active">
+            <h1>Ana Sayfa</h1>
+            <div class="content-box">
+                <p>Mavi Amiral'e hoş geldiniz. Stratejiler derinliklerden şekillenir, yüzeye kusursuz çıkar.</p>
+                <p>Karadaki gürültünün ötesinde, denizlerin stratejik sessizliğinde konuşlanmış durumdayım.</p>
             </div>
         </div>
-    </header>
 
-    <!-- Hero Banner -->
-    <section class="hero">
-        <div class="container">
-            <h1>PUBG Mobile UC Satın Al</h1>
-            <p>Anında teslimat ile en uygun fiyatlar!</p>
-            <a href="#" class="btn-primary">Hemen Al</a>
-        </div>
-    </section>
-
-    <!-- UC Paketleri -->
-    <section class="packages">
-        <div class="container">
-            <h2>POPÜLER UC PAKETLERİ</h2>
-            <div class="package-grid">
-                <!-- Paket 1 -->
-                <div class="package-card">
-                    <div class="package-header">
-                        <h3>600 UC</h3>
-                    </div>
-                    <div class="package-price">
-                        <span class="old-price">120 TL</span>
-                        <span class="new-price">99 TL</span>
-                    </div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-bolt"></i> 5 Dakikada Teslimat</li>
-                        <li><i class="fas fa-shield-alt"></i> Güvenli Ödeme</li>
-                    </ul>
-                    <a href="#" class="btn-buy">Satın Al</a>
-                </div>
-
-                <!-- Paket 2 (Öne Çıkan) -->
-                <div class="package-card featured">
-                    <div class="package-badge">EN ÇOK SATAN</div>
-                    <div class="package-header">
-                        <h3>3,000 UC</h3>
-                    </div>
-                    <div class="package-price">
-                        <span class="old-price">450 TL</span>
-                        <span class="new-price">399 TL</span>
-                    </div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-bolt"></i> 5 Dakikada Teslimat</li>
-                        <li><i class="fas fa-gift"></i> +100 UC Hediye</li>
-                    </ul>
-                    <a href="#" class="btn-buy">Satın Al</a>
-                </div>
-
-                <!-- Paket 3 -->
-                <div class="package-card">
-                    <div class="package-header">
-                        <h3>6,000 UC</h3>
-                    </div>
-                    <div class="package-price">
-                        <span class="old-price">900 TL</span>
-                        <span class="new-price">799 TL</span>
-                    </div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-bolt"></i> 5 Dakikada Teslimat</li>
-                        <li><i class="fas fa-crown"></i> VIP Destek</li>
-                    </ul>
-                    <a href="#" class="btn-buy">Satın Al</a>
-                </div>
+        <!-- Hakkımızda Sayfası -->
+        <div id="about" class="page">
+            <h1>Hakkımızda</h1>
+            <div class="content-box">
+                <p>Bizler derin stratejilerle karmaşık problemlere çözümler üreten bir ekibiz.</p>
+                <p>Sessiz derinlikler, keskin hamleler. Haritanın ötesini görenler için.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Özellikler -->
-    <section class="features">
-        <div class="container">
-            <h2>NEDEN BİZİ SEÇMELİSİNİZ?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-rocket"></i>
-                    <h3>Anında Teslimat</h3>
-                    <p>Siparişiniz 5 dakika içinde hesabınıza yüklenir.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-lock"></i>
-                    <h3>Güvenli Ödeme</h3>
-                    <p>256-bit SSL ile korunan ödeme sistemleri.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-headset"></i>
-                    <h3>7/24 Destek</h3>
-                    <p>WhatsApp ve canlı destek ile yanınızdayız.</p>
-                </div>
+        <!-- Hizmetler Sayfası -->
+        <div id="services" class="page">
+            <h1>Hizmetlerimiz</h1>
+            <div class="content-box">
+                <h3>Stratejik Planlama</h3>
+                <p>Karmaşık durumlarda uzun vadeli stratejiler geliştirerek rakiplerinizin önüne geçin.</p>
+            </div>
+            <div class="content-box">
+                <h3>Deniz Operasyonları</h3>
+                <p>Denizlerdeki hakimiyet, küresel gücün temelidir.</p>
             </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h4>Hızlı Linkler</h4>
-                    <ul>
-                        <li><a href="#">Ana Sayfa</a></li>
-                        <li><a href="#">UC Paketleri</a></li>
-                        <li><a href="#">Hesap Yükleme</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Yardım</h4>
-                    <ul>
-                        <li><a href="#">SSS</a></li>
-                        <li><a href="#">İade Politikası</a></li>
-                        <li><a href="#">Kullanım Koşulları</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>İletişim</h4>
-                    <ul>
-                        <li><i class="fab fa-whatsapp"></i> WhatsApp: +90 555 123 4567</li>
-                        <li><i class="fas fa-envelope"></i> Email: destek@pubgturkiye.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="payment-methods">
-                <img src="payment-methods.png" alt="Ödeme Yöntemleri">
-            </div>
-            <div class="copyright">
-                <p>© 2023 PUBG Türkiye. Tüm hakları saklıdır.</p>
+        <!-- İletişim Sayfası -->
+        <div id="contact" class="page">
+            <h1>İletişim</h1>
+            <div class="content-box">
+                <p>Bizimle iletişime geçmek için:</p>
+                <p>Email: info@maviamiral.com</p>
+                <p>Telefon: +90 555 123 45 67</p>
+                <p>Adres: Denizler Caddesi, Strateji Limanı</p>
             </div>
         </div>
-    </footer>
+    </div>
+
+    <script>
+        // Sayfalar arası geçiş için JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            
+            // Her navigasyon linki için tıklama olayı ekle
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Tıklanan linkin hangi sayfaya ait olduğunu al
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Tüm sayfaları ve linkleri pasif yap
+                    pages.forEach(page => page.classList.remove('active'));
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    // Hedef sayfayı ve linki aktif yap
+                    document.getElementById(targetPage).classList.add('active');
+                    this.classList.add('active');
+                    
+                    // URL'yi güncelle (isteğe bağlı)
+                    window.history.pushState({}, '', `#${targetPage}`);
+                });
+            });
+            
+            // Sayfa yüklendiğinde hash değerine göre sayfa aç
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const targetPage = document.getElementById(hash);
+                if (targetPage) {
+                    pages.forEach(page => page.classList.remove('active'));
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    
+                    targetPage.classList.add('active');
+                    document.querySelector(`[data-page="${hash}"]`).classList.add('active');
+                }
+            }
+        });
+    </script>
 </body>
 </html>
