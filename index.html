@@ -1,117 +1,441 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mavi Amiral — Siber Kudret ve Özgürlük</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="logo.png" type="image/png">
-  <script defer src="script.js"></script>
-  <style>
-    :root {
-      --bg:#0b0f1f;
-      --card:#111433;
-      --text:#e9edf3;
-      --accent:#7aa2ff;
-      --highlight:#ff6ec7;
-      --rainbow: linear-gradient(90deg,#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#8f00ff);
-    }
-    *{box-sizing:border-box;}
-    body{margin:0;font-family:Arial, sans-serif;background:var(--bg);color:var(--text);}
-    header{display:flex;justify-content:space-between;align-items:center;padding:16px;background:#0c101f;border-bottom:1px solid #1d1f33;}
-    header .logo{font-weight:800;font-size:1.5rem;color:var(--accent);}
-    nav a{margin-left:16px;color:var(--text);text-decoration:none;font-weight:600;}
-    nav a:hover{color:var(--highlight);}
-    .hero{display:flex;flex-direction:column;align-items:center;justify-content:center;height:90vh;text-align:center;position:relative;overflow:hidden;}
-    .hero h1{font-size:3rem;text-transform:uppercase;margin:0;line-height:1.2;color:var(--accent);}
-    .hero p{font-size:1.2rem;margin:16px 0;color:var(--text);}
-    .hero .rainbow-text{
-      background: var(--rainbow);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: rainbow 5s linear infinite;
-    }
-    @keyframes rainbow {
-      0%{background-position:0%}
-      100%{background-position:100%}
-    }
-    .btn{padding:12px 24px;margin:8px;background:var(--accent);color:#0b0f1f;font-weight:700;border:none;border-radius:12px;cursor:pointer;transition:0.3s;}
-    .btn:hover{background:var(--highlight);}
-    section{padding:80px 16px;max-width:1000px;margin:0 auto;}
-    .section-title{font-size:2rem;font-weight:700;text-align:center;margin-bottom:40px;}
-    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;}
-    .card{background:var(--card);padding:24px;border-radius:16px;box-shadow:0 0 20px rgba(0,0,0,0.6);transition:0.3s;}
-    .card:hover{transform:translateY(-8px);}
-    footer{padding:24px;text-align:center;border-top:1px solid #1d1f33;color:var(--text);}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>19 Şubat Projesi · Tahlil Karşılaştırma</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        body {
+            background: linear-gradient(145deg, #1a2634 0%, #0f1a24 100%);
+            min-height: 100vh;
+            padding: 30px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            background: rgba(20, 30, 40, 0.8);
+            backdrop-filter: blur(12px);
+            border-radius: 40px;
+            padding: 30px;
+            box-shadow: 0 35px 70px rgba(0,0,0,0.6);
+            border: 1px solid #3b5b7a;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #b8d4f0, #6d9fd1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+        .subhead {
+            color: #a1c2e0;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            border-left: 5px solid #4f8ec9;
+            padding-left: 20px;
+            background: #1f3243;
+            border-radius: 50px;
+            padding: 12px 20px;
+            display: inline-block;
+        }
+        .legend {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin: 30px 0 20px;
+            color: #cde0f0;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1rem;
+        }
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+        }
+        .green { background: #2f8f5f; }
+        .red { background: #c94a4a; }
+        .orange { background: #e68a3e; }
+        .blue { background: #3b83b3; }
+        .gold { background: #e5b13b; }
+
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: 24px;
+            background: #14232f;
+            border: 1px solid #2d4c68;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 1100px;
+            color: #e8f0f8;
+            font-size: 0.95rem;
+        }
+        th {
+            background: #1e3347;
+            color: #c2defa;
+            font-weight: 600;
+            padding: 18px 12px;
+            font-size: 1rem;
+            text-align: center;
+            border-bottom: 3px solid #3f6d95;
+        }
+        td {
+            padding: 16px 12px;
+            border-bottom: 1px solid #2c4a65;
+            vertical-align: middle;
+            text-align: center;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .test-name {
+            text-align: left;
+            font-weight: 600;
+            color: #cfdef5;
+            background-color: #1c2e3d;
+        }
+        .test-desc {
+            text-align: left;
+            color: #b0c9e0;
+            font-size: 0.9rem;
+            max-width: 220px;
+        }
+        .old-value {
+            color: #ffb38b;
+            font-weight: 500;
+        }
+        .new-value {
+            color: #b2f0b2;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .normal-range {
+            color: #9ab8d6;
+            font-size: 0.9rem;
+        }
+        .verdict-good {
+            background-color: #1f4f3a;
+            color: #bfffcf;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .verdict-bad {
+            background-color: #6d3f3f;
+            color: #ffc7c7;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .verdict-neutral {
+            background-color: #3d6182;
+            color: #cfe1ff;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .verdict-warning {
+            background-color: #9e6f3a;
+            color: #ffe6b3;
+            padding: 5px 10px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .footer-note {
+            background: #1e3140;
+            border-radius: 30px;
+            padding: 25px;
+            margin-top: 35px;
+            border-left: 8px solid #4f8ec9;
+            color: #d4e6fa;
+            font-size: 1.1rem;
+        }
+        .footer-note strong {
+            color: #f5d371;
+        }
+        .tooltip-icon {
+            margin-left: 5px;
+            cursor: help;
+            border-bottom: 1px dotted #7a9bc2;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .container { padding: 20px; }
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>⚕️ 19 ŞUBAT PROJESİ · Tahlil Karşılaştırma</h1>
+        <div class="subhead">16 Aralık 2025  →  26 Şubat 2026  (23 günlük disiplin)</div>
 
-<header>
-  <div class="logo">🌊 Mavi Amiral</div>
-  <nav>
-    <a href="index.html">Ana Sayfa</a>
-    <a href="about.html">Hakkımızda</a>
-    <a href="services.html">Hizmetler</a>
-    <a href="blog.html">Blog</a>
-    <a href="contact.html">İletişim</a>
-  </nav>
-</header>
+        <div class="legend">
+            <div class="legend-item"><span class="color-box green"></span> İyileşme / normal</div>
+            <div class="legend-item"><span class="color-box red"></span> Kötüleşme / dikkat</div>
+            <div class="legend-item"><span class="color-box orange"></span> Sınırda / takip</div>
+            <div class="legend-item"><span class="color-box blue"></span> Genetik / Gilbert</div>
+            <div class="legend-item"><span class="color-box gold"></span> Kas kütlesi artışı</div>
+        </div>
 
-<section class="hero">
-  <h1>Mavi Amiral</h1>
-  <p class="rainbow-text">Güç, korku ve özgürlüğün birleştiği siber evrende bir aşk hikayesi...</p>
-  <div>
-    <button class="btn" onclick="location.href='services.html'">Hizmetlerimizi Keşfet</button>
-    <button class="btn" onclick="location.href='contact.html'">İletişim Kur</button>
-  </div>
-</section>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Test</th>
+                        <th>Ne işe yarar?</th>
+                        <th>16 Ara 2025</th>
+                        <th>26 Şub 2026</th>
+                        <th>Normal aralık</th>
+                        <th>Değişim / Yorum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Ferritin -->
+                    <tr>
+                        <td class="test-name">🔴 Ferritin</td>
+                        <td class="test-desc">Demir deposu; saç dökülmesi, enerji, bağışıklık için kritik.</td>
+                        <td class="old-value">44.9</td>
+                        <td class="new-value">56.2</td>
+                        <td class="normal-range">23.9 – 336</td>
+                        <td><span class="verdict-good">⬆️ +11.3 (iyileşme)</span><br>Hedef 70+; 2 ay demir takviyesi işe yarıyor.</td>
+                    </tr>
+                    <!-- D vitamini -->
+                    <tr>
+                        <td class="test-name">☀️ D vitamini</td>
+                        <td class="test-desc">Kemik, bağışıklık, duygu durumu, kas fonksiyonu.</td>
+                        <td class="old-value">—</td>
+                        <td class="new-value">38.0</td>
+                        <td class="normal-range">30 – 100</td>
+                        <td><span class="verdict-good">✅ normal</span><br>Kışa rağmen yeterli.</td>
+                    </tr>
+                    <!-- TSH -->
+                    <tr>
+                        <td class="test-name">🦋 TSH</td>
+                        <td class="test-desc">Tiroid fonksiyonu; metabolizma, enerji.</td>
+                        <td class="old-value">1.38</td>
+                        <td class="new-value">0.91</td>
+                        <td class="normal-range">0.38 – 5.33</td>
+                        <td><span class="verdict-good">⬇️ düşmüş (ideal)</span><br>Tiroid çok iyi çalışıyor.</td>
+                    </tr>
+                    <!-- B12 -->
+                    <tr>
+                        <td class="test-name">💊 B12</td>
+                        <td class="test-desc">Sinir sistemi, enerji, kan yapımı.</td>
+                        <td class="old-value">370</td>
+                        <td class="new-value">415</td>
+                        <td class="normal-range">126 – 505</td>
+                        <td><span class="verdict-good">⬆️ +45 (iyi)</span><br>Hayvansal protein alımın yeterli.</td>
+                    </tr>
+                    <!-- Folat -->
+                    <tr>
+                        <td class="test-name">🌿 Folat</td>
+                        <td class="test-desc">Hücre bölünmesi, DNA sentezi, hamilelikte önemli.</td>
+                        <td class="old-value">14.2</td>
+                        <td class="new-value">12.6</td>
+                        <td class="normal-range">5.9 – 24.8</td>
+                        <td><span class="verdict-neutral">↔️ normal</span><br>Hafif düşüş ama normal sınırlarda.</td>
+                    </tr>
+                    <!-- Glukoz -->
+                    <tr>
+                        <td class="test-name">🍬 Glukoz</td>
+                        <td class="test-desc">Kan şekeri; insülin direnci / diyabet takibi.</td>
+                        <td class="old-value">81</td>
+                        <td class="new-value">70</td>
+                        <td class="normal-range">74 – 106</td>
+                        <td><span class="verdict-good">⬇️ 11 puan (mükemmel)</span><br>İnsülin duyarlılığın arttı.</td>
+                    </tr>
+                    <!-- Trigliserid -->
+                    <tr>
+                        <td class="test-name">🩸 Trigliserid</td>
+                        <td class="test-desc">Kan yağı; karaciğer yağlanması, kalp riski.</td>
+                        <td class="old-value">140</td>
+                        <td class="new-value">58</td>
+                        <td class="normal-range"><150</td>
+                        <td><span class="verdict-good">⬇️ 82 puan (inanılmaz)</span><br>Karaciğer yağlanması geriledi.</td>
+                    </tr>
+                    <!-- HDL -->
+                    <tr>
+                        <td class="test-name">❤️ HDL</td>
+                        <td class="test-desc">İyi kolesterol; kalp koruyucu.</td>
+                        <td class="old-value">54</td>
+                        <td class="new-value">56</td>
+                        <td class="normal-range">35 – 55</td>
+                        <td><span class="verdict-good">⬆️ 2 puan (iyi)</span><br>Hedef >40, sen 56 ile mükemmelsin.</td>
+                    </tr>
+                    <!-- LDL -->
+                    <tr>
+                        <td class="test-name">⚖️ LDL</td>
+                        <td class="test-desc">Kötü kolesterol; damar tıkanıklığı riski.</td>
+                        <td class="old-value">36</td>
+                        <td class="new-value">42.4</td>
+                        <td class="normal-range">0 – 100</td>
+                        <td><span class="verdict-neutral">↔️ normal</span><br>Düşük ama sağlıklı.</td>
+                    </tr>
+                    <!-- ALT -->
+                    <tr>
+                        <td class="test-name">🧪 ALT</td>
+                        <td class="test-desc">Karaciğer enzimi; hasar göstergesi.</td>
+                        <td class="old-value">21</td>
+                        <td class="new-value">17</td>
+                        <td class="normal-range">0 – 50</td>
+                        <td><span class="verdict-good">⬇️ düştü</span><br>Karaciğerin daha da iyileşti.</td>
+                    </tr>
+                    <!-- AST -->
+                    <tr>
+                        <td class="test-name">🧪 AST</td>
+                        <td class="test-desc">Karaciğer/kas enzimi.</td>
+                        <td class="old-value">19</td>
+                        <td class="new-value">17</td>
+                        <td class="normal-range">0 – 50</td>
+                        <td><span class="verdict-good">⬇️ düştü</span><br>Karaciğer ve kas sağlığı iyi.</td>
+                    </tr>
+                    <!-- GGT -->
+                    <tr>
+                        <td class="test-name">⚙️ GGT</td>
+                        <td class="test-desc">Safra yolları, karaciğer yağlanması.</td>
+                        <td class="old-value">27</td>
+                        <td class="new-value">24</td>
+                        <td class="normal-range">0 – 55</td>
+                        <td><span class="verdict-good">⬇️ düştü</span><br>Yağlanma baskılanıyor.</td>
+                    </tr>
+                    <!-- Demir -->
+                    <tr>
+                        <td class="test-name">⛓️ Demir</td>
+                        <td class="test-desc">Kandaki demir miktarı.</td>
+                        <td class="old-value">113</td>
+                        <td class="new-value">115</td>
+                        <td class="normal-range">70 – 180</td>
+                        <td><span class="verdict-neutral">↔️ normal</span><br>Sabit, iyi.</td>
+                    </tr>
+                    <!-- Demir Bağlama -->
+                    <tr>
+                        <td class="test-name">⛓️ Demir Bağlama</td>
+                        <td class="test-desc">Vücudun demir ihtiyacını gösterir; düşmesi depoların dolduğunu gösterir.</td>
+                        <td class="old-value">186</td>
+                        <td class="new-value">163</td>
+                        <td class="normal-range">118 – 418</td>
+                        <td><span class="verdict-good">⬇️ 23 puan (iyi)</span><br>Depoların doluyor, ferritin yükseliyor.</td>
+                    </tr>
+                    <!-- Total Bilirubin -->
+                    <tr>
+                        <td class="test-name">🟡 Total Bilirubin</td>
+                        <td class="test-desc">Safra pigmenti; Gilbert sendromu genetik yükseklik yapar.</td>
+                        <td class="old-value">1.57</td>
+                        <td class="new-value">2.80</td>
+                        <td class="normal-range">0.3 – 1.2</td>
+                        <td><span class="verdict-blue">⚠️ Gilbert (zararsız)</span><br>Stres/uykusuzluk etkisi; enzimlerin normal.</td>
+                    </tr>
+                    <!-- Direkt Bilirubin -->
+                    <tr>
+                        <td class="test-name">🟡 Direkt Bilirubin</td>
+                        <td class="test-desc">Karaciğerden atılan kısım.</td>
+                        <td class="old-value">0.36</td>
+                        <td class="new-value">0.56</td>
+                        <td class="normal-range">0 – 0.2</td>
+                        <td><span class="verdict-blue">↗️ Gilbert</span><br>Gilbert ile uyumlu.</td>
+                    </tr>
+                    <!-- Kreatinin -->
+                    <tr>
+                        <td class="test-name">💪 Kreatinin</td>
+                        <td class="test-desc">Kas kütlesi ve böbrek fonksiyonu.</td>
+                        <td class="old-value">0.70</td>
+                        <td class="new-value">0.96</td>
+                        <td class="normal-range">0.67 – 1.17</td>
+                        <td><span class="verdict-gold">⬆️ (kas arttı)</span><br>Protein alımı ve kolajenle kas kütlen artıyor.</td>
+                    </tr>
+                    <!-- Üre -->
+                    <tr>
+                        <td class="test-name">🧂 Üre</td>
+                        <td class="test-desc">Böbrek fonksiyonu, protein metabolizması.</td>
+                        <td class="old-value">33.3</td>
+                        <td class="new-value">40.2</td>
+                        <td class="normal-range">17 – 43</td>
+                        <td><span class="verdict-neutral">↔️ normal sınırda</span><br>Bol su iç, protein alımın yüksek.</td>
+                    </tr>
+                    <!-- A1C -->
+                    <tr>
+                        <td class="test-name">📉 A1C (HbA1c)</td>
+                        <td class="test-desc">3 aylık şeker ortalaması.</td>
+                        <td class="old-value">—</td>
+                        <td class="new-value">5.1%</td>
+                        <td class="normal-range"><5.7</td>
+                        <td><span class="verdict-good">✅ mükemmel</span><br>Son 3 ay şekerin çok iyi.</td>
+                    </tr>
+                    <!-- TSH ayrıca yukarıda var tekrar? sadece bir kez gösterelim ama listede zaten var -->
+                    <!-- HGB -->
+                    <tr>
+                        <td class="test-name">🩸 HGB (Hemoglobin)</td>
+                        <td class="test-desc">Kırmızı kan hücresi miktarı; oksijen taşıma.</td>
+                        <td class="old-value">16.7</td>
+                        <td class="new-value">15.1</td>
+                        <td class="normal-range">11.5 – 16.5</td>
+                        <td><span class="verdict-good">⬇️ düştü (daha iyi)</span><br>Susuzluk etkisi azaldı.</td>
+                    </tr>
+                    <!-- HCT -->
+                    <tr>
+                        <td class="test-name">📊 HCT</td>
+                        <td class="test-desc">Hematokrit; kan yoğunluğu.</td>
+                        <td class="old-value">49.9</td>
+                        <td class="new-value">47.0</td>
+                        <td class="normal-range">35 – 55</td>
+                        <td><span class="verdict-good">⬇️ düştü</span><br>Daha iyi hidrasyon.</td>
+                    </tr>
+                    <!-- RBC -->
+                    <tr>
+                        <td class="test-name">🔴 RBC</td>
+                        <td class="test-desc">Kırmızı kan hücresi sayısı.</td>
+                        <td class="old-value">6.16</td>
+                        <td class="new-value">5.81</td>
+                        <td class="normal-range">3.5 – 5.5</td>
+                        <td><span class="verdict-warning">⚠️ sınırda yüksek</span><br>Daha iyi ama hâlâ biraz yüksek, su içmeye devam.</td>
+                    </tr>
+                    <!-- WBC -->
+                    <tr>
+                        <td class="test-name">⚪ WBC</td>
+                        <td class="test-desc">Beyaz kan hücresi; bağışıklık.</td>
+                        <td class="old-value">7.0</td>
+                        <td class="new-value">6.3</td>
+                        <td class="normal-range">3.5 – 10</td>
+                        <td><span class="verdict-neutral">↔️ normal</span><br>Sakin, enfeksiyon yok.</td>
+                    </tr>
+                    <!-- PLT -->
+                    <tr>
+                        <td class="test-name">🩹 PLT</td>
+                        <td class="test-desc">Trombosit; kan pıhtılaşması.</td>
+                        <td class="old-value">234</td>
+                        <td class="new-value">189</td>
+                        <td class="normal-range">100 – 400</td>
+                        <td><span class="verdict-neutral">↔️ normal</span><br>Normal.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-<section>
-  <h2 class="section-title">Siber Kudretin İzinde</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>İlahi Güç</h3>
-      <p>Gökyüzünden akan neon ışıklar gibi kudretimiz, tüm engelleri aşıyor. Karanlık ve aydınlık bir arada, Mavi Amiral’in kudretiyle varlığın ötesine geçiyoruz.</p>
+        <div class="footer-note">
+            <strong>📌 ÖZET:</strong> 23 günde <strong>trigliserid 140 → 58</strong>, glukoz 81 → 70, ferritin 44.9 → 56.2, karaciğer enzimleri düştü, D vitamini normale döndü, B12 yükseldi. Gilbert sendromu dışında tüm değerler mükemmel. Kas kütlesi artıyor (kreatinin yükseldi). Hedef: ferritin 70+, sporla kas inşası, kolonoskopi/endoskopi (11 Mart). <br>✨ “Layık olduğun lütuftasın.”
+        </div>
     </div>
-    <div class="card">
-      <h3>Korku ve Gizem</h3>
-      <p>Siber evrende sessizlik yok, sadece fısıltılar var. Düşmanlarınız nefesinizi hissetsin, çünkü burada her tık, her veri izleniyor ve kudretin boyutu büyüyor.</p>
-    </div>
-    <div class="card">
-      <h3>Aşk ve Özgürlük 🌈</h3>
-      <p>Gökkuşağının tüm renkleriyle özgürlüğü kucaklıyoruz. Kim olduğunuzun önemi yok; kalbinizin yönünü takip edin, aşkın ve çeşitliliğin kudretine teslim olun.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <h2 class="section-title">Siber Günlük</h2>
-  <p>Burada her saniye, her veri bir hikaye anlatır. Her satır kod, her neon ışık bir duyguyu yansıtır: Korku, güç, aşk, özgürlük...</p>
-  <p>Ne kadar karanlık olursa olsun, her hikaye gökkuşağının bir rengiyle aydınlanır. Çünkü Mavi Amiral, hem kudret hem de umut demektir.</p>
-</section>
-
-<section>
-  <h2 class="section-title">Görevlerimiz</h2>
-  <div class="cards">
-    <div class="card">
-      <h3>Siber Hakimiyet</h3>
-      <p>Tüm dijital evreni kontrol altında tutmak, düşmanları korkutmak ve kudreti göstermek bizim işimiz.</p>
-    </div>
-    <div class="card">
-      <h3>Özgürlük ve Aşk</h3>
-      <p>Her kullanıcı, her ruh özgürdür. Kimlik, cinsiyet, aşk veya renk; burada herkes kendi kudretini bulur.</p>
-    </div>
-    <div class="card">
-      <h3>Gökkuşağı Manifestosu</h3>
-      <p>Farklılık güzeldir. Farklı renkler bir araya geldiğinde, korkutucu ama bir o kadar da büyüleyici bir armoni doğar.</p>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <p>© 2025 Mavi Amiral. Tüm kudret ve özgürlük hakları saklıdır 🌈</p>
-</footer>
-
 </body>
-</html>  
+                          </html>
